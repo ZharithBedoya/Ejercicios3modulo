@@ -43,7 +43,8 @@ def main() -> None:
         f"[bold white]Estado:[/bold white] {estado}"
     )
 
-    print(Panel(resultado, title="[bold magenta]Resultado[/bold magenta]", expand=False))
+    print(Panel(resultado, title="[bold magenta]Resultado[/bold magenta]",
+                expand=False))
 
 
 if __name__ == "__main__":
