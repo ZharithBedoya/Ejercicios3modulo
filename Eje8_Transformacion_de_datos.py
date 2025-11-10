@@ -2,20 +2,28 @@ from typing import List, Dict
 from rich.console import Console
 from rich.table import Table
 
-def obtener_palabras_mayusculas_largas(texto: str, longitud_minima: int = 6) -> List[str]:
+import re
+
+import re
+
+import re
+
+def obtener_palabras_mayusculas_largas(texto: str) -> list:
     """
-    Extrae una lista de palabras que estén en mayúsculas y tengan más de un número
-    mínimo de letras del texto dado.
+    Extrae palabras en mayúsculas con al menos 6 letras.
 
     Args:
-        texto (str): Texto de entrada.
-        longitud_minima (int): Longitud mínima de las palabras. Por defecto es 6.
+        texto (str): Texto a analizar.
 
     Returns:
-        List[str]: Lista de palabras en mayúsculas que cumplen la longitud mínima.
+        list: Lista de palabras en mayúsculas con al menos 6 letras.
     """
-    palabras = texto.split()
-    return [palabra for palabra in palabras if palabra.isupper() and len(palabra) >= longitud_minima]
+    # Busca palabras que sean completamente mayúsculas y tengan al menos 6 letras
+    palabras = re.findall(r'\b[A-ZÁÉÍÓÚÑ]{6,}\b', texto)
+    return palabras
+
+
+
 
 def contar_longitud_palabras(palabras: List[str]) -> Dict[str, int]:
     """
