@@ -3,36 +3,36 @@ from rich.table import Table
 from rich.console import Console
 
 
-def aplicar_validador(datos: List, validador: Callable[[object], bool]) -> List:
+def aplicar_validador(lista: list, validador: callable) -> list:
     """
-    Aplica un validador a los elementos de una lista y devuelve
-    una nueva lista con los elementos que pasan la validación.
+    Aplica un validador a cada elemento de una lista y devuelve solo los que pasan.
 
     Args:
-        datos (list): Lista de datos a validar.
-        validador (Callable[[object], bool]): Función que recibe un elemento
-           y devuelve True si pasa la validación, False en caso contrario.
+        lista (list): Lista de elementos a validar.
+        validador (callable): Función que valida cada elemento.
 
     Returns:
-        list: Lista con los elementos que aprobaron la validación.
+        list: Lista de elementos que pasan la validación.
     """
-    return [dato for dato in datos if validador(dato)]
+    return [item for item in lista if validador(item)]
 
+
+
+import re
 
 def es_email_valido(email: str) -> bool:
     """
-    Valida si un email tiene un formato básico válido.
+    Verifica si un email tiene un formato válido.
 
     Args:
         email (str): Email a validar.
 
     Returns:
-        bool: True si el email tiene '@' y un punto '.' después del '@', False en caso contrario.
+        bool: True si el email es válido, False en caso contrario.
     """
-    if '@' in email:
-        dominio = email.split('@')[1]
-        return '.' in dominio and len(dominio.split('.')) > 1
-    return False
+    patron = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+    return re.fullmatch(patron, email) is not None
+
 
 
 def es_mayor_a_10(numero: int) -> bool:
